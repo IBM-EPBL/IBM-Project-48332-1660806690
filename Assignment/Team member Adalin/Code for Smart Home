@@ -1,0 +1,39 @@
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(13,OUTPUT); //LED lights in the room
+  pinMode(3,INPUT);  //ECHO in ultrasonic
+  pinMode(2,OUTPUT);  //TRIGGER in ultrasonic
+  pinMode(12,OUTPUT);  //Buzzer for temperature
+}
+
+void loop()
+{
+  digitalWrite(2,0);
+  digitalWrite(2,1);
+  delay(1000);
+  digitalWrite(2,0);
+  float dur=pulseIn(3,1);
+  float dis=(dur*0.0343)/2;
+  digitalWrite(13,0);
+  if (dis<20){
+    Serial.print("Distance: ");
+    Serial.print(dis);
+    Serial.println(" cm");
+    digitalWrite(13,1);
+    double a=analogRead(A0);
+    double t=(((a/1024) *5)-0.5) *100;
+    Serial.print("Temperature: ");
+    Serial.println(t);
+    delay(1000);
+    if (t>100){
+      for(int j=130;j<150;j++)
+      {
+      tone(12,j);
+      }
+      delay(10000);
+      noTone(12);
+    }  
+  }
+  delay(1000);
+}
