@@ -1,0 +1,26 @@
+#include <Servo.h>
+int site = 0;
+Servo s; 
+void setup()
+{
+  Serial.begin(9600);
+  s.attach(3,500,2500);
+  pinMode(11,OUTPUT);
+}
+
+void loop()
+{
+  double a=analogRead(A0);
+  double t=(((a/1024)*5)-0.5)*100;
+  Serial.println('temp value');
+  Serial.println(t);
+  delay(1000);
+  if(t>120){
+    digitalWrite(11,HIGH);
+    site = 0;
+    for (site = 1; site <=180; site+=80){
+      s.write(site);
+      delay(100);
+    }  
+  }
+}  
