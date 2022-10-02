@@ -1,0 +1,37 @@
+void setup()
+{
+  pinMode(4,OUTPUT);
+  Serial.begin(9600);
+  pinMode(12,OUTPUT);
+}
+
+/*
+void loop()
+{
+  int a=analogRead(A0);
+  int brightness=a/4;
+  analogWrite(4,brightness);
+  
+}
+*/
+void loop()
+{
+  int a = analogRead(A0);
+  Serial.print("Analog Value: ");
+  Serial.println(a);
+  int b = map(a,0,1023,0,255);
+  Serial.print("mapped Value: ");
+  Serial.println(b);
+  analogWrite(4,b);
+  double c=analogRead(A1);
+  double t=(((c/1024)*5)-0.5)*100;
+  Serial.print("TEMP VALUE: ");
+  Serial.println(t);
+  digitalWrite(12,0);
+  if (t>124){
+    digitalWrite(12,1);
+  }
+  delay(1000);
+  
+  
+}
