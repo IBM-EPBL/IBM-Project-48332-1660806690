@@ -1,0 +1,27 @@
+#include <Servo.h>
+int position = 0;
+int i = 0;
+int j = 0;
+Servo s;
+void setup()
+{
+  s.attach(9, 500, 2500);
+  Serial.begin(9600);
+  pinMode(13,OUTPUT);
+}
+
+void loop()
+{
+  position = 0;
+  for (position = 1; position <=179; position += 1) {
+    s.write(position);
+    delay(100);// Wait for 100 millisecond(s)
+    double a=analogRead(A0);
+    double t=(((a/1024)*5)-0.5)*100;
+    Serial.print("temperature");
+    Serial.print(t);
+    if(t>100){
+      digitalWrite(13,1);
+    }
+  }
+}
