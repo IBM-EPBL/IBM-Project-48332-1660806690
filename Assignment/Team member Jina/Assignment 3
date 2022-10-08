@@ -1,0 +1,64 @@
+#Python code for blinking of led 
+import RPi.GPIO as GPIO
+
+from time import sleep
+
+GPIO.setwarnings(False)
+
+GPIO.setmode(GPIO.BOARD)
+
+GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
+
+while True:
+
+ GPIO.output(8, GPIO.HIGH)
+
+ sleep(1)
+
+ GPIO.output(8, GPIO.LOW)
+
+ sleep(1)
+ #Python code for traffic light
+ from gpiozero import LED
+
+from time import sleep
+
+green = LED(17) 
+
+red = LED(18) 
+
+yellow = LED(2) 
+
+ 
+
+green.on() 
+
+yellow.off() 
+
+red.off() 
+
+while True:
+
+       sleep(10) 
+
+       green.off() 
+
+       yellow.on() 
+
+       sleep(5) 
+
+       yellow.off() 
+
+       red.on() 
+
+       sleep(5) 
+
+       yellow.on() 
+
+       sleep(5) 
+
+       green.on() 
+
+       yellow.off()
+
+       red.off()
